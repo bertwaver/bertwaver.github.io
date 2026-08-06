@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="张鑫宇，BertWaver，个人主页。">
+  <meta name="theme-color" content="#17324d">
+  <title>张鑫宇 - 山东女子学院 - 关于 - BertWaver</title>
+  <style>
+    :root {
+      --ink: #18222d;
+      --ink-soft: #5f6973;
+      --navy: #17324d;
+      --navy-deep: #10263a;
+      --paper: #f7f3eb;
+      --paper-light: #fffdf8;
+      --line: #d7d0c4;
+      --red: #a53a32;
+      --gold: #bc9250;
+      --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, serif;
+      --sans: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 2rem;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    ::selection {
+      color: #fff;
+      background: var(--red);
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0;
+      left: 1rem;
+      z-index: 100;
+      padding: .55rem .85rem;
+      color: #fff;
+      background: var(--red);
+      transform: translateY(-120%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .page-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 21.5rem minmax(0, 1fr);
+    }
+
+    .profile-rail {
+      min-height: 100vh;
+      padding: 3.25rem 2.5rem 2rem;
+      color: #eef2f4;
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      align-self: start;
+      overflow: hidden;
+    }
+
+    .profile-rail::after {
+      content: "BW";
+      position: absolute;
+      right: -1.1rem;
+      bottom: -4.8rem;
+      color: rgba(255, 255, 255, .035);
+      font-family: Georgia, serif;
+      font-size: 13rem;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .rail-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      color: rgba(255, 255, 255, .58);
+      font-family: var(--mono);
+      font-size: .65rem;
+      text-transform: uppercase;
+    }
+
+    .rail-mark {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .28);
+      color: #fff;
+      font-family: Georgia, serif;
+      font-size: .8rem;
+    }
+
+    .portrait {
+      width: 8.8rem;
+      aspect-ratio: 4 / 5;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.65rem;
+      border: 1px solid rgba(255, 255, 255, .24);
+      color: var(--navy);
+      background: var(--paper-light);
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      overflow: hidden;
+    }
+
+    .portrait.has-photo { background: #dce1e4; }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-name {
+      margin: 0;
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .profile-name-en {
+      margin: .2rem 0 0;
+      color: rgba(255, 255, 255, .58);
+      font-family: Georgia, serif;
+      font-size: .92rem;
+      letter-spacing: .04em;
+    }
+
+    .profile-affiliation {
+      margin: 1.15rem 0 0;
+      padding-top: 1.15rem;
+      border-top: 1px solid rgba(255, 255, 255, .17);
+      color: rgba(255, 255, 255, .82);
+      font-size: .82rem;
+      line-height: 1.7;
+    }
+
+    .profile-affiliation strong {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .side-nav {
+      margin: 2.5rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .side-nav a {
+      display: grid;
+      grid-template-columns: 1.4rem 1fr;
+      gap: .65rem;
+      align-items: center;
+      padding: .43rem 0;
+      color: rgba(255, 255, 255, .55);
+      font-size: .76rem;
+      transition: color .16s ease, transform .16s ease;
+    }
+
+    .side-nav a span:first-child {
+      color: rgba(255, 255, 255, .3);
+      font-family: var(--mono);
+      font-size: .62rem;
+    }
+
+    .side-nav a:hover,
+    .side-nav a.is-active {
+      color: #fff;
+      transform: translateX(.22rem);
+    }
+
+    .side-nav a.is-active span:first-child { color: var(--gold); }
+
+    .rail-links {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: .55rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, .17);
+    }
+
+    .rail-links a,
+    .rail-links span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      color: rgba(255, 255, 255, .72);
+      font-size: .73rem;
+    }
+
+    .rail-links a:hover { color: #fff; }
+    .rail-links small { color: rgba(255, 255, 255, .34); font-family: var(--mono); }
+
+    .mobile-bar { display: none; }
+
+    .content-canvas {
+      min-width: 0;
+      background:
+        linear-gradient(rgba(24, 34, 45, .035) 1px, transparent 1px) 0 0 / 100% 4.5rem,
+        var(--paper);
+    }
+
+    .content-inner {
+      width: min(100% - 5rem, 66rem);
+      margin: 0 auto;
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero {
+      min-height: 24rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 9rem;
+      gap: 3rem;
+      align-items: end;
+      padding-bottom: 4.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .eyebrow {
+      margin: 0 0 1.2rem;
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: .69rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 42rem;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 3.4rem;
+      font-weight: 600;
+      line-height: 1.34;
+    }
+
+    .hero-lead {
+      max-width: 44rem;
+      margin: 1.55rem 0 0;
+      color: var(--ink-soft);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+
+    .hero-stamp {
+      width: 8.25rem;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-family: var(--serif);
+      font-size: .82rem;
+      text-align: center;
+      transform: rotate(-3deg);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 10rem minmax(0, 1fr);
+      gap: 3.5rem;
+      padding: 4.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      align-self: start;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .section-number {
+      display: block;
+      margin-bottom: .6rem;
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: .66rem;
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .section-heading p {
+      margin: .45rem 0 0;
+      color: var(--ink-soft);
+      font-family: Georgia, serif;
+      font-size: .72rem;
+      line-height: 1.5;
+    }
+
+    .project-list,
+    .award-list,
+    .ip-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .item-index {
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: .68rem;
+      font-weight: 700;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: start;
+      padding: 1.6rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-item.has-image {
+      grid-template-columns: 2.2rem minmax(0, 1fr) minmax(19rem, 46%);
+      column-gap: 1.4rem;
+      row-gap: .8rem;
+    }
+
+    .project-item:last-child,
+    .award-item:last-child,
+    .ip-item:last-child { border-bottom: 1px solid var(--line); }
+
+    .project-image {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #e4e7eb;
+      box-shadow: 0 .8rem 2rem rgba(24, 34, 45, .09);
+    }
+
+    .project-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .22s ease;
+    }
+
+    .project-item.has-image .item-index {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .project-item.has-image .project-copy {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .project-item.has-image .project-year {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: end;
+    }
+
+    .project-item:hover .project-image img { transform: scale(1.025); }
+
+    .project-copy h3,
+    .award-copy h3,
+    .ip-copy h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      font-weight: 600;
+    }
+
+    .project-copy h3 a:hover,
+    .ip-copy h3 a:hover { color: var(--red); }
+
+    .project-copy p,
+    .award-copy p,
+    .ip-copy p {
+      margin: .55rem 0 0;
+      color: var(--ink-soft);
+      font-size: .84rem;
+      line-height: 1.85;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem 1rem;
+      margin-top: .8rem;
+      color: var(--navy);
+      font-family: var(--mono);
+      font-size: .66rem;
+    }
+
+    .project-tags span::before { content: "#"; margin-right: .15rem; color: var(--red); }
+
+    .project-year,
+    .award-year,
+    .ip-year {
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: .67rem;
+    }
+
+    .award-item {
+      display: grid;
+      grid-template-columns: 2.2rem 5rem minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+      padding: 1.3rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .award-year {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .ip-item {
+      display: grid;
+      grid-template-columns: 2.2rem 2.4rem minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: start;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .ip-mark {
+      width: 2.25rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      border-left: 3px solid var(--red);
+      color: var(--navy);
+      background: #ebe4d8;
+      font-family: var(--serif);
+      font-size: .78rem;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding-top: 1rem;
+    }
+
+    .contact-panel p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .84rem;
+      line-height: 1.85;
+    }
+
+    .contact-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
+      display: grid;
+      grid-template-columns: 4rem minmax(0, 1fr);
+      gap: 1rem;
+      padding: .55rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .76rem;
+    }
+
+    .contact-list span:first-child {
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: .63rem;
+      text-transform: uppercase;
+    }
+
+    .contact-list a:hover { color: var(--red); }
+
+    .page-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-top: 2rem;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: .62rem;
+    }
+
+    .page-footer a { color: var(--navy); }
+    .page-footer a:hover { color: var(--red); }
+
+    .mobile-nav-button {
+      width: 2.3rem;
+      height: 2.3rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .mobile-nav-button span,
+    .mobile-nav-button span::before,
+    .mobile-nav-button span::after {
+      width: 1rem;
+      height: 1px;
+      display: block;
+      background: currentColor;
+      position: relative;
+    }
+
+    .mobile-nav-button span::before,
+    .mobile-nav-button span::after { content: ""; position: absolute; left: 0; }
+    .mobile-nav-button span::before { top: -.32rem; }
+    .mobile-nav-button span::after { top: .32rem; }
+
+    @media (min-width: 901px) and (max-width: 1180px) {
+      .project-item.has-image {
+        grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+        row-gap: 1.1rem;
+      }
+
+      .project-item.has-image .item-index { grid-column: 1; grid-row: 1 / span 2; }
+      .project-item.has-image .project-image { grid-column: 2 / -1; grid-row: 1; }
+      .project-item.has-image .project-copy { grid-column: 2; grid-row: 2; }
+      .project-item.has-image .project-year { grid-column: 3; grid-row: 2; }
+    }
+
+    @media (max-width: 900px) {
+      .page-shell { display: block; }
+
+      .profile-rail {
+        min-height: 0;
+        padding: 1rem 1.25rem;
+        position: relative;
+      }
+
+      .profile-rail::after,
+      .profile-rail > :not(.mobile-bar) { display: none; }
+
+      .mobile-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .mobile-identity {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+      }
+
+      .mobile-monogram {
+        width: 2.5rem;
+        height: 2.5rem;
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255,255,255,.3);
+        font-family: var(--serif);
+        font-size: .8rem;
+      }
+
+      .mobile-identity strong { display: block; font-family: var(--serif); font-size: .88rem; }
+      .mobile-identity small { display: block; color: rgba(255,255,255,.55); font-size: .62rem; }
+
+      .mobile-menu {
+        display: none;
+        padding: 1rem 0 .25rem;
+        border-top: 1px solid rgba(255,255,255,.15);
+        margin-top: 1rem;
+      }
+
+      .profile-rail.menu-open .mobile-menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem 1rem; }
+      .mobile-menu a { color: rgba(255,255,255,.72); font-size: .72rem; }
+
+      .content-inner {
+        width: min(100% - 2.5rem, 44rem);
+        padding-top: 3rem;
+      }
+
+      .hero { min-height: 0; grid-template-columns: 1fr; padding-bottom: 3.25rem; }
+      .hero h1 { font-size: 2.45rem; }
+      .hero-stamp { display: none; }
+
+      .section { grid-template-columns: 1fr; gap: 1.8rem; padding: 3.5rem 0; }
+      .section-heading { position: static; }
+      .contact-panel { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .profile-rail.menu-open .mobile-menu { grid-template-columns: repeat(2, 1fr); }
+      .content-inner { width: min(100% - 2rem, 44rem); }
+      .hero h1 { font-size: 2rem; }
+      .hero-lead { font-size: .95rem; }
+      .project-item,
+      .project-item.has-image { grid-template-columns: 1.7rem minmax(0, 1fr); gap: .8rem; }
+      .project-item.has-image .item-index { grid-column: 1; grid-row: 1; }
+      .project-item.has-image .project-image { grid-column: 2; grid-row: 1; width: 100%; }
+      .project-item.has-image .project-copy { grid-column: 2; grid-row: 2; }
+      .project-item.has-image .project-year { grid-column: 2; grid-row: 3; }
+      .project-copy { grid-column: 2; }
+      .project-year { grid-column: 2; }
+      .award-item { grid-template-columns: 1.7rem 3.5rem minmax(0, 1fr); gap: .8rem; }
+      .ip-item { grid-template-columns: 1.7rem 2.25rem minmax(0, 1fr); gap: .8rem; }
+      .ip-year { grid-column: 3; }
+      .page-footer { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="page-shell">
+    <aside class="profile-rail" id="profileRail">
+      <div class="mobile-bar">
+        <a class="mobile-identity" href="#top">
+          <span class="mobile-monogram" data-initials>BW</span>
+          <span><strong data-name>张鑫宇</strong><small data-affiliation>山东女子学院</small></span>
+        </a>
+        <button class="mobile-nav-button" id="menuButton" type="button" aria-label="打开页面导航" aria-expanded="false"><span></span></button>
+      </div>
+      <nav class="mobile-menu" aria-label="移动端页面导航">
+        <a href="#projects">项目</a><a href="#awards">获奖</a><a href="#intellectual-property">专利与软著</a>
+        <a href="#contact">联系</a><a href="https://blog.ixfish.cn/">博客</a>
+      </nav>
+
+      <div class="rail-topline"><span>Personal homepage</span><span class="rail-mark">BW</span></div>
+      <div class="portrait" id="portrait" aria-label="个人头像"><span data-initials>BW</span></div>
+      <h2 class="profile-name" data-name>张鑫宇</h2>
+      <p class="profile-name-en" data-name-en>Xinyu Zhang</p>
+      <p class="profile-affiliation"><strong data-affiliation>山东女子学院</strong><span data-role>个人主页 / Personal Homepage</span></p>
+
+      <nav aria-label="页面章节">
+        <ol class="side-nav">
+          <li><a href="#projects"><span>01</span><span>项目</span></a></li>
+          <li><a href="#awards"><span>02</span><span>获奖</span></a></li>
+          <li><a href="#intellectual-property"><span>03</span><span>知识产权</span></a></li>
+          <li><a href="#contact"><span>04</span><span>联系</span></a></li>
+        </ol>
+      </nav>
+
+      <div class="rail-links">
+        <a href="https://blog.ixfish.cn/"><span>返回 BertWaver</span><small>↗</small></a>
+        <a data-email-link hidden><span>Email</span><small>↗</small></a>
+        <a data-github-link hidden><span>GitHub</span><small>↗</small></a>
+      </div>
+    </aside>
+
+    <div class="content-canvas">
+      <main class="content-inner" id="main">
+        <header class="hero" id="top">
+          <div>
+            <p class="eyebrow">About</p>
+            <h1>Bert Waver</h1>
+            <p class="hero-lead" data-intro>中国计算机学会会员、中国人工智能学会会员、ACM竞赛生。</p>
+          </div>
+          
+        </header>
+
+        <section class="section" id="projects">
+          <div class="section-heading"><span class="section-number">01 / Projects</span><h2>项目</h2><p>Selected projects</p></div>
+          <ol class="project-list" id="projectList"></ol>
+        </section>
+
+        <section class="section" id="awards">
+          <div class="section-heading"><span class="section-number">02 / Awards</span><h2>获奖</h2><p>Honors & awards</p></div>
+          <ol class="award-list" id="awardList"></ol>
+        </section>
+
+        <section class="section" id="intellectual-property">
+          <div class="section-heading"><span class="section-number">03 / IP</span><h2>知识产权</h2><p>Patents & Copyrights</p></div>
+          <ol class="ip-list" id="ipList"></ol>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="section-heading"><span class="section-number">04 / Contact</span><h2>联系</h2><p>Get in touch</p></div>
+          <div class="contact-panel">
+            <p>欢迎围绕学习、技术、研究或项目合作进行交流。</p>
+            <ul class="contact-list" id="contactList"></ul>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <span>© <span id="year"></span> <span data-name>张鑫宇</span> · BertWaver · 鲁ICP备19060431号</span>
+          <a href="https://blog.ixfish.cn/">BertWaver ↗</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const PROFILE = {
+      name: '张鑫宇',
+      nameEn: 'Xinyu Zhang',
+      affiliation: '山东女子学院本科生，计算机科学与技术专业在读',
+      role: '个人主页 / Personal Homepage',
+      photo: './pic/head.jpg',
+      intro: 'ACM竞赛生（校ACM集训队队长）、中国计算机学会会员、山东人工智能学会会员。主要研究方向：手语评价、深度学习、度量学习、神经网络架构优化。',
+      projects: [
+        { title: '基于 Transformer 和特征比对的手语评价方法及系统', description: '面向手语教学与自动化评测场景的深度学习系统。融合 MediaPipe 手部关键点提取、Transformer 时序建模及余弦相似度特征比对，实现手语动作的实时精准评价。支持边缘端部署，可在普通摄像头下运行。另引入时序平滑算法，解决了手语识别过程中词跳变等问题。', image: './pic/1.png', tags: ['Transformer, MediaPipe, PyTorch, 深度学习'], year: '2025', url: 'https://gysy.org.cn' },
+        { title: '基于 ESP8266 的智能睡眠系统', description: '基于 ESP8266 微控制器的智能睡眠监测与改善系统，集成传感器数据采集、睡眠质量分析与自动环境调节功能。曾获青岛市中小学生研究性学习优秀成果评选二等奖。', image: '', tags: ['ESP8266, IoT, 嵌入式, 传感器'], year: '2022', url: '' },
+        { title: 'Signup - 桌面端打卡签到系统', description: '基于 C# 开发的桌面端自动化打卡签到系统，支持定时任务、座位管理，提供图形化操作界面。', image: './pic/signx.png', tags: ['C#, .NET, 桌面应用'], year: '2022', url: 'https://github.com/bertwaver/signup/' },
+        { title: 'Larry - 个人全栈技术博客', description: '基于 React 19 + Vite + TypeScript + Express + Tailwind CSS 的全栈博客系统，支持文章管理、About 配置、番剧追番、友链等完整功能。部署于 OpenCloudOS + 宝塔面板 + PM2，使用 MySQL 存储。', image: './pic/blog.png', tags: ['React 19, TypeScript, Express, MySQL, Tailwind CSS'], year: '2026', url: 'https://ixfish.cn' },
+        { title: '阴阳爻变', description: '使用Unity引擎开发的二维闯关游戏，利用"动态规划"思想实现了流畅自然的动作变换。游戏主人公可在"阴""阳"两种状态间切换，收集不同的道具，在解决谜题的过程中学习中国古代物理知识，获得成长。', image: './pic/yyyb.png', tags: ['Unity, C#, 2D游戏'], year: '2025', url: 'https://yun.ixfish.cn/#s/EChDFyau' },
+        { title: 'Blinker_Win - 第三方 Blinker 桌面客户端', description: '支持自动填充登录的第三方 Blinker 桌面客户端，基于 Python 开发，为 IoT 开发者提供便捷的设备管理工具。', image: '', tags: ['Python, IoT, 桌面客户端'], year: '2023', url: 'https://github.com/bertwaver/blinker_Win' }
+      ],
+      awards: [
+        { title: '团体程序设计天梯赛', detail: '个人一等奖 · 国赛 · 算法竞赛', year: '2026' },
+        { title: '国际青年人工智能大赛', detail: '二等奖 · 总决赛 · AI', year: '2025' },
+        { title: '蓝桥杯全国软件和信息技术专业人才大赛(C/C++)', detail: '国赛二等奖 · 省赛一等奖 · 算法竞赛', year: '2026' },
+        { title: '中国大学生计算机设计大赛', detail: '一等奖 · 省赛 · 游戏设计', year: '2025' },
+        { title: '"1024"程序员节程序设计竞赛', detail: '一等奖 · 校赛', year: '2024' },
+        { title: '中国机器人及人工智能大赛', detail: '三等奖 · 国赛 · AI', year: '2026' }
+      ],
+      intellectualProperty: [
+        { type: '发明专利', title: '一种基于端云协同的手语识别交互系统', number: '202610372511.9', status: '实质审查', year: '2026', url: '' },
+        { type: '软件著作权', title: '阴阳爻变游戏软件', number: '2025SR1479407', status: '已授权', year: '2025', url: '' },
+        { type: '软件著作权', title: 'SignUp快速签到系统', number: '2024SR0492962', status: '已授权', year: '2024', url: '' }
+      ],
+      email: '2797920819@qq.com',
+      github: 'https://github.com/bertwaver',
+      blog: 'https://blog.ixfish.cn/'
+    };
+
+    const escapeHTML = (value) => String(value).replace(/[&<>'"]/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    })[char]);
+
+    document.title = `${PROFILE.name} - ${PROFILE.affiliation} - 关于 - BertWaver`;
+    document.querySelectorAll('[data-name]').forEach(el => { el.textContent = PROFILE.name; });
+    document.querySelectorAll('[data-name-en]').forEach(el => { el.textContent = PROFILE.nameEn; });
+    document.querySelectorAll('[data-affiliation]').forEach(el => { el.textContent = PROFILE.affiliation; });
+    document.querySelectorAll('[data-role]').forEach(el => { el.textContent = PROFILE.role; });
+    document.querySelectorAll('[data-intro]').forEach(el => { el.textContent = PROFILE.intro; });
+    document.querySelectorAll('[data-initials]').forEach(el => { el.textContent = PROFILE.name.slice(0, 2); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    if (PROFILE.photo) {
+      const portrait = document.getElementById('portrait');
+      portrait.classList.add('has-photo');
+      portrait.innerHTML = `<img src="${escapeHTML(PROFILE.photo)}" alt="${escapeHTML(PROFILE.name)}的个人照片">`;
+    }
+
+    const projects = PROFILE.projects.length ? PROFILE.projects : [
+      { title: '内容整理中', description: '项目内容将在整理后公开。', image: '', tags: [], year: '—', url: '' }
+    ];
+    document.getElementById('projectList').innerHTML = projects.map((item, index) => {
+      const title = item.url
+        ? `<a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.title)} ↗</a>`
+        : escapeHTML(item.title);
+      const image = item.image
+        ? `<figure class="project-image"><img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.title)}项目图片" loading="lazy"></figure>`
+        : '';
+      return `<li class="project-item${item.image ? ' has-image' : ''}">
+        <span class="item-index">${String(index + 1).padStart(2, '0')}</span>${image}
+        <div class="project-copy"><h3>${title}</h3><p>${escapeHTML(item.description)}</p>
+          <div class="project-tags">${(item.tags || []).map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>
+        </div><time class="project-year">${escapeHTML(item.year)}</time></li>`;
+    }).join('');
+
+    const awards = PROFILE.awards.length ? PROFILE.awards : [
+      { title: '内容整理中', detail: '获奖内容将在整理后公开。', year: '—' }
+    ];
+    document.getElementById('awardList').innerHTML = awards.map((item, index) => `
+      <li class="award-item"><span class="item-index">${String(index + 1).padStart(2, '0')}</span>
+        <time class="award-year">${escapeHTML(item.year)}</time>
+        <div class="award-copy"><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.detail)}</p></div></li>`).join('');
+
+    const intellectualProperty = PROFILE.intellectualProperty.length ? PROFILE.intellectualProperty : [
+      { type: '知识产权', title: '内容整理中', number: '', status: '专利与软件著作权将在整理后公开。', year: '—', url: '' }
+    ];
+    document.getElementById('ipList').innerHTML = intellectualProperty.map((item, index) => {
+      const title = item.url
+        ? `<a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.title)} ↗</a>`
+        : escapeHTML(item.title);
+      const detail = [item.number, item.status].filter(Boolean).map(escapeHTML).join(' · ');
+      const mark = item.type === '软件著作权' ? '软' : item.type === '专利' ? '专' : '权';
+      return `<li class="ip-item"><span class="item-index">${String(index + 1).padStart(2, '0')}</span>
+        <span class="ip-mark" aria-label="${escapeHTML(item.type)}">${mark}</span>
+        <div class="ip-copy"><h3>${title}</h3><p>${escapeHTML(item.type)} · ${detail}</p></div>
+        <time class="ip-year">${escapeHTML(item.year)}</time></li>`;
+    }).join('');
+
+    const contacts = [
+      ['Email', PROFILE.email, PROFILE.email ? `mailto:${PROFILE.email}` : ''],
+      ['GitHub', PROFILE.github, PROFILE.github],
+      ['Blog', 'BertWaver', PROFILE.blog],
+      ['School', PROFILE.affiliation, '']
+    ];
+    document.getElementById('contactList').innerHTML = contacts.map(([label, text, href]) => `
+      <li><span>${escapeHTML(label)}</span>${href
+        ? `<a href="${escapeHTML(href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(text)} ↗</a>`
+        : `<span>${escapeHTML(text || '待补充')}</span>`}</li>`).join('');
+
+    const bindRailLink = (selector, href, text) => {
+      const link = document.querySelector(selector);
+      if (!href) return;
+      link.href = href;
+      link.hidden = false;
+      link.querySelector('span').textContent = text;
+    };
+    bindRailLink('[data-email-link]', PROFILE.email ? `mailto:${PROFILE.email}` : '', 'Email');
+    bindRailLink('[data-github-link]', PROFILE.github, 'GitHub');
+
+    const rail = document.getElementById('profileRail');
+    const menuButton = document.getElementById('menuButton');
+    menuButton.addEventListener('click', () => {
+      const open = rail.classList.toggle('menu-open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '关闭页面导航' : '打开页面导航');
+    });
+    document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', () => {
+      rail.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+
+    const navLinks = [...document.querySelectorAll('.side-nav a')];
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.toggle('is-active', link.hash === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-20% 0px -65% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+  </script>
+</body>
+</html>
