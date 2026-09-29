@@ -490,6 +490,23 @@
             margin-top: 0.75rem;
         }
 
+        .award-line {
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .awards-list--more {
+            display: none;
+            margin-top: 0;
+        }
+
+        .awards-list--more.is-expanded {
+            display: block;
+        }
+
         .award-item {
             display: flex;
             gap: 1.5rem;
@@ -734,7 +751,7 @@
                 <nav id="site-nav" class="greedy-nav">
                     <ul>
                         <li class="masthead__menu-item--lg">
-                            <a href="https://ixfish.cn">个人主页</a>
+                            <a href="https://ixfish.cn">BertWaver</a>
                         </li>
                         <li class="masthead__menu-item"><a href="#about">关于我</a></li>
                         <li class="masthead__menu-item"><a href="#projects">项目</a></li>
@@ -1012,22 +1029,37 @@
                         </div>
 
                         <div class="award-item">
-                            <div class="award-year">2024</div>
-                            <div class="award-content">
-                                <div class="award-title">"1024"程序员节程序设计竞赛</div>
-                                <div class="award-meta"><span class="award-type">一等奖</span> · 校赛</div>
-                            </div>
-                        </div>
-
-                        <div class="award-item">
                             <div class="award-year">2022</div>
                             <div class="award-content">
                                 <div class="award-title">青岛市中小学生研究性学习优秀成果评选</div>
                                 <div class="award-meta"><span class="award-type">二等奖</span> · 市赛</div>
                             </div>
                         </div>
-                        
+                    </div>
 
+                    <div class="awards-list awards-list--more" id="awards-more">
+                        <div class="award-line">2025.5 外教社“词达人杯”全国大学生英语词汇能力大赛校决赛 一等奖</div>
+                        <div class="award-line">2025.3 山东女子学院 学习标兵</div>
+                        <div class="award-line">2025.3 山东女子学院 二等奖学金</div>
+                        <div class="award-line">2024.10 山东女子学院 "1024"程序员节程序设计竞赛 一等奖</div>
+                        <div class="award-line">2022.5 山东省平度第一中学 英语单词PK赛 二等奖</div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button type="button" id="toggle-awards-btn" class="projects-toggle-btn" onclick="
+                            const more = document.getElementById('awards-more');
+                            const btn = document.getElementById('toggle-awards-btn');
+                            const icon = btn.querySelector('i');
+                            if (more.classList.contains('is-expanded')) {
+                                more.classList.remove('is-expanded');
+                                btn.classList.remove('is-expanded');
+                                btn.innerHTML = '展开更多 <i class=\'fas fa-chevron-down\'></i>';
+                            } else {
+                                more.classList.add('is-expanded');
+                                btn.classList.add('is-expanded');
+                                btn.innerHTML = '收起 <i class=\'fas fa-chevron-up\'></i>';
+                            }
+                        ">展开更多 <i class="fas fa-chevron-down"></i></button>
                     </div>
 
                     <!-- IP Section -->
